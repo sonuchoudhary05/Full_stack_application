@@ -21,7 +21,7 @@ Installation
 Clone the repository:
 bash
 Copy code
-git clone https://github.com/your-username/binary-tree-path-sum-calculator.git
+https://github.com/sonuchoudhary05/Full_stack_application/tree/full_stack
 cd binary-tree-path-sum-calculator
 Install dependencies:
 bash
