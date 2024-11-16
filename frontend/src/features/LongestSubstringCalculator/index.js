@@ -1,9 +1,15 @@
-// src/features/LongestSubstringCalculator/index.js
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const LongestSubstringCalculator = () => {
   const [input, setInput] = useState("");
   const [results, setResults] = useState({ length: 0, substrings: [] });
+  const navigate = useNavigate(); // Hook for navigation
+
+  // Function to handle the dashboard redirection
+  const goToDashboard = () => {
+    navigate("/dashboard"); // Navigate to the dashboard page
+  };
 
   const calculateSubstring = () => {
     const length = longestUniqueSubstring(input);
@@ -45,6 +51,9 @@ const LongestSubstringCalculator = () => {
           {results.substrings.map((s, index) => <li key={index}>{s}</li>)}
         </ul>
       </div>
+
+      {/* Dashboard Button */}
+      <button onClick={goToDashboard}>Go to Dashboard</button>
     </div>
   );
 };

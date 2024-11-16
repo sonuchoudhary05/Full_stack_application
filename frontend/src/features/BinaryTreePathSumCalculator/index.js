@@ -1,13 +1,19 @@
-// src/features/BinaryTreePathSumCalculator/index.js
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setBinaryTreePathSum } from "../../redux/BinaryTreeSlice";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const BinaryTreePathSumCalculator = () => {
   const [treeData, setTreeData] = useState("");
   const [targetSum, setTargetSum] = useState("");
   const dispatch = useDispatch();
   const pathSum = useSelector((state) => state.binaryTree.pathSum);
+  const navigate = useNavigate(); // Hook for navigation
+
+  // Function to handle the dashboard redirection
+  const goToDashboard = () => {
+    navigate("/dashboard"); // Navigate to the dashboard page
+  };
 
   const calculatePathSum = () => {
     const tree = JSON.parse(treeData);
@@ -38,6 +44,9 @@ const BinaryTreePathSumCalculator = () => {
       />
       <button onClick={calculatePathSum}>Calculate</button>
       {pathSum ? <p>Path with sum {pathSum} exists!</p> : <p>No path with the specified sum.</p>}
+
+      {/* Dashboard Button */}
+      <button onClick={goToDashboard}>Go to Dashboard</button>
     </div>
   );
 };

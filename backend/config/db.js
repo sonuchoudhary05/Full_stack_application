@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect('mongodb+srv://sonukumar:yp2EeV3p9bw05fHX@cluster0.rulo3.mongodb.net/');  // Removed useNewUrlParser and useUnifiedTopology
     console.log("MongoDB connected...");
   } catch (error) {
     console.error("MongoDB connection error:", error);
