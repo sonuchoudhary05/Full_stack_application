@@ -1,15 +1,15 @@
 services:
   - name: my-backend
     type: web
-    region: ap-southeast-1  # Correct region code for Singapore
+    region: us-east-1  # Replace with a valid region like 'us-east-1'
     plan: free
-    runtime: node  # Specify Node.js runtime for the backend
+    runtime: node
     buildCommand: npm install
     startCommand: npm start
   - name: my-frontend
     type: web
-    region: ap-southeast-1  # Correct region code for Singapore
+    region: us-east-1  # Replace with a valid region like 'us-east-1'
     plan: free
-    runtime: node  # Specify Node.js runtime for the frontend
+    runtime: node
     buildCommand: npm run build
     startCommand: npm start
