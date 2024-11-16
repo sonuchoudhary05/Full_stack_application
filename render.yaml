@@ -1,20 +1,13 @@
 services:
-  # Backend Service
-  - type: web
-    name: backend-service
-    env: node
-    buildCommand: "npm install"
-    startCommand: "npm start"
+  - name: my-backend
+    type: web
+    region: sg  # Use Singapore region code
     plan: free
-    region: us
-    branch: full_stack
-
-  # Frontend Service
-  - type: web
-    name: frontend-service
-    env: node
-    buildCommand: "npm install && npm run build"
-    startCommand: "npm run start"
+    buildCommand: npm install
+    startCommand: npm start
+  - name: my-frontend
+    type: web
+    region: sg  # Use Singapore region code for frontend
     plan: free
-    region: us
-    branch: full_stack
+    buildCommand: npm run build
+    startCommand: npm start
