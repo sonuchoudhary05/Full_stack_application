@@ -1,19 +1,16 @@
 services:
-  # Backend API Service
+  - name: frontend
+    type: web
+    plan: free
+    runtime: node
+    buildCommand: npm run build
+    startCommand: serve -s build  # Use this if you're serving a static React build
+    region: us-west-2  # Valid region for Render
+  
   - name: backend
     type: web
     plan: free
     runtime: node
     buildCommand: npm install
     startCommand: npm start
-    env: production  # Optional, specify environment if needed
-    region: ap-southeast-1  # Replace with correct region if needed
-
-  # Frontend Service (React)
-  - name: frontend
-    type: web
-    plan: free
-    runtime: node
-    buildCommand: npm run build  # Adjust for your build process
-    startCommand: npm run start  # If using a server to serve React app
-    region: ap-southeast-1  # Replace with correct region if needed
+    region: us-west-2  # Valid region for Render
