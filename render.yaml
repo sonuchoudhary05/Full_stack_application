@@ -1,15 +1,12 @@
 services:
   - name: my-backend
     type: web
-    region: us-east-1  # Replace with a valid region like 'us-east-1'
     plan: free
     runtime: node
     buildCommand: npm install
     startCommand: npm start
   - name: my-frontend
-    type: web
-    region: us-east-1  # Replace with a valid region like 'us-east-1'
+    type: static
     plan: free
-    runtime: node
     buildCommand: npm run build
     startCommand: npm start
