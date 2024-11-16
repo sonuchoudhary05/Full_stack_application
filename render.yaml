@@ -1,12 +1,19 @@
 services:
-  - name: my-backend
+  # Backend API Service
+  - name: backend
     type: web
     plan: free
     runtime: node
     buildCommand: npm install
     startCommand: npm start
-  - name: my-frontend
-    type: static
+    env: production  # Optional, specify environment if needed
+    region: ap-southeast-1  # Replace with correct region if needed
+
+  # Frontend Service (React)
+  - name: frontend
+    type: web
     plan: free
-    buildCommand: npm run build
-    startCommand: npm start
+    runtime: node
+    buildCommand: npm run build  # Adjust for your build process
+    startCommand: npm run start  # If using a server to serve React app
+    region: ap-southeast-1  # Replace with correct region if needed
