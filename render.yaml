@@ -1,13 +1,15 @@
 services:
   - name: my-backend
     type: web
-    region: sg  # Use Singapore region code
+    region: sg  # Singapore region code
     plan: free
+    runtime: node  # Specify Node.js runtime for the backend
     buildCommand: npm install
     startCommand: npm start
   - name: my-frontend
     type: web
-    region: sg  # Use Singapore region code for frontend
+    region: sg  # Singapore region code for frontend
     plan: free
+    runtime: node  # Specify Node.js runtime for the frontend
     buildCommand: npm run build
     startCommand: npm start
