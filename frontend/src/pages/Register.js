@@ -1,7 +1,7 @@
-// src/pages/Register.js
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../redux/authSlice";
+import { NavLink } from "react-router-dom";
 
 const Register = () => {
   const [formData, setFormData] = useState({ name: "", email: "", password: "" });
@@ -20,7 +20,15 @@ const Register = () => {
   return (
     <form onSubmit={handleSubmit}>
       <h2>Register</h2>
-      {error && <p>{error}</p>}
+      {error && (
+        <p style={{ color: "red" }}>
+          {/* Render error message */}
+          {typeof error === "object" && error.msg ? error.msg : error}
+          {typeof error === "object" && error.msg === "User already exists" && (
+            <NavLink to="/login">Login</NavLink>
+          )}
+        </p>
+      )}
       <input name="name" placeholder="Name" onChange={handleChange} />
       <input name="email" placeholder="Email" onChange={handleChange} />
       <input name="password" placeholder="Password" onChange={handleChange} type="password" />

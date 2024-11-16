@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../redux/authSlice";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [responseError, setResponseError] = useState(null);
   const { loading, error, token } = useSelector((state) => state.auth);
 
   // Handle form field changes
@@ -17,22 +18,22 @@ const Login = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Dispatch login action
     const response = await dispatch(loginUser(formData));
-    // Assuming the response includes a flag or status to indicate user registration
-    if (response?.error?.message === "Rejected") {
-      // Navigate to the register page
-      navigate('/register');
-    } else if (response?.success) {
-      // Navigate to the dashboard or another page after successful login
-      navigate('/dashboard');
+    console.log("Response:", response);
+
+    // Check if the login attempt was rejected
+    if (loginUser.rejected.match(response)) {
+      const errorMessage = response.payload?.msg || "Login failed"; // Extract error message
+      setResponseError(errorMessage);
+    } else if (loginUser.fulfilled.match(response)) {
+      // Navigate to dashboard if login was successful
+      navigate("/dashboard");
     }
   };
 
-  // Navigate to dashboard if login is successful and token is available
+  // Navigate to dashboard if token is available
   useEffect(() => {
     if (token) {
-      console.log('Login successful. Token:', token); // Debugging: Ensure token is available
       navigate("/dashboard");
     }
   }, [token, navigate]);
@@ -40,12 +41,21 @@ const Login = () => {
   return (
     <form onSubmit={handleSubmit}>
       <h2>Login</h2>
-      {error && <p>{error}</p>}
+      {/* Render the error message */}
+      {responseError && <p style={{ color: "red" }}>{error.message}</p>}
+      {responseError && (
+        <div>
+          <p>User not registered. Please register to continue.</p>
+          <NavLink to="/register">Register</NavLink>
+        </div>
+      )}
+
       <input
         name="email"
         placeholder="Email"
         onChange={handleChange}
         value={formData.email}
+        required
       />
       <input
         name="password"
@@ -53,6 +63,7 @@ const Login = () => {
         type="password"
         onChange={handleChange}
         value={formData.password}
+        required
       />
       <button type="submit" disabled={loading}>
         {loading ? "Logging in..." : "Login"}
